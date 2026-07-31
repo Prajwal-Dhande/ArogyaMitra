@@ -83,7 +83,8 @@ export default function ProfilePage() {
 
   useEffect(() => {
     // Fetch profile from backend on mount
-    fetch('http://localhost:3001/api/health/profile')
+    const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:3001';
+    fetch(`${API_URL}/api/health/profile`)
       .then(res => res.json())
       .then(data => {
         if (data && Object.keys(data).length > 0) {
@@ -108,7 +109,8 @@ export default function ProfilePage() {
 
   const handleSave = async () => {
     try {
-      const response = await fetch('http://localhost:3001/api/health/profile', {
+      const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:3001';
+      const response = await fetch(`${API_URL}/api/health/profile`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(profile)

@@ -37,7 +37,7 @@ const WELCOME_MSG = {
   role: 'assistant',
   agent: 'orchestrator',
   content:
-    "🙏 Namaste! I'm **ArogyaMitra**, your AI health assistant.\n\nI can help you with:\n• **Symptom Check** — Describe how you're feeling\n• **Find Hospital** — Locate nearest PHC/hospital\n• **Health Advice** — Diet & wellness guidance\n\nYou can type or use the 🎤 mic button to speak in your language.\n\n**How are you feeling today?**",
+    "🙏 नमस्ते! मैं **आरोग्यमित्र (ArogyaMitra)** हूँ, आपका AI स्वास्थ्य सहायक।\n\nमैं इन चीज़ों में आपकी मदद कर सकता हूँ:\n• **लक्षण जांच (Symptom Check)** — मुझे बताएं कि आपको कैसा महसूस हो रहा है\n• **अस्पताल खोजें (Find Hospital)** — अपने आस-पास के अस्पताल या क्लिनिक खोजें\n• **स्वास्थ्य सलाह (Health Advice)** — आहार और स्वास्थ्य से जुड़ी जानकारी\n\nआप अपनी भाषा में टाइप कर सकते हैं।\n\n**आज आपको कैसा महसूस हो रहा है?**",
   timestamp: new Date().toISOString(),
   severity: null,
 }
@@ -74,7 +74,6 @@ export default function ChatPage() {
   const [messages, setMessages] = useState([WELCOME_MSG])
   const [input, setInput] = useState('')
   const [isLoading, setIsLoading] = useState(false)
-  const [isRecording, setIsRecording] = useState(false)
   const [selectedLang, setSelectedLang] = useState('hi')
   const [showLangMenu, setShowLangMenu] = useState(false)
   const [patientProfile, setPatientProfile] = useState({})
@@ -89,7 +88,8 @@ export default function ChatPage() {
 
   useEffect(() => {
     // Fetch profile on mount
-    fetch('http://localhost:3001/api/health/profile')
+    const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:3001';
+    fetch(`${API_URL}/api/health/profile`)
       .then(res => res.json())
       .then(data => {
         if (data && Object.keys(data).length > 0) {
@@ -127,7 +127,8 @@ export default function ChatPage() {
     setIsLoading(true)
 
     try {
-      const res = await fetch('http://localhost:3001/api/chat/message', {
+      const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:3001';
+      const res = await fetch(`${API_URL}/api/chat/message`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
@@ -168,19 +169,6 @@ export default function ChatPage() {
     if (e.key === 'Enter' && !e.shiftKey) {
       e.preventDefault()
       handleSend()
-    }
-  }
-
-  const toggleRecording = () => {
-    if (isRecording) {
-      setIsRecording(false)
-    } else {
-      setIsRecording(true)
-      // Auto-stop after 3s for demo (voice recording not yet implemented)
-      setTimeout(() => {
-        setIsRecording(false)
-        setInput('...') // Indicates voice recording finished, user can replace this
-      }, 3000)
     }
   }
 
@@ -335,26 +323,7 @@ export default function ChatPage() {
 
       {/* Input Area */}
       <div className="chat-input-area">
-        {isRecording && (
-          <div className="recording-indicator animate-slide-up">
-            <div className="recording-waves">
-              {[...Array(5)].map((_, i) => (
-                <span key={i} className="wave-bar" style={{ animationDelay: `${i * 0.1}s` }}></span>
-              ))}
-            </div>
-            <span>Listening in {selectedLangObj?.label}...</span>
-          </div>
-        )}
         <div className="input-bar glass-card">
-          <button
-            className={`btn btn-icon mic-btn ${isRecording ? 'mic-btn--active' : ''}`}
-            onClick={toggleRecording}
-            title={isRecording ? 'Stop recording' : 'Start voice input'}
-            id="voice-input-btn"
-          >
-            {isRecording ? <MicOff size={20} /> : <Mic size={20} />}
-            {isRecording && <span className="mic-pulse"></span>}
-          </button>
           <textarea
             ref={inputRef}
             className="chat-input"
