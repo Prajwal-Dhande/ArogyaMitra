@@ -1,0 +1,157 @@
+/* ===== ProfilePage Styles ===== */
+
+.profile-page {
+  padding: var(--space-md);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-md);
+  padding-bottom: var(--space-3xl);
+}
+
+/* --- Header --- */
+.profile-header {
+  text-align: center;
+  padding: var(--space-xl) 0;
+}
+
+.profile-avatar-large {
+  width: 72px;
+  height: 72px;
+  margin: 0 auto var(--space-md);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(135deg, var(--primary-500), var(--primary-700));
+  border-radius: 50%;
+  color: white;
+  box-shadow: 0 4px 20px rgba(16, 185, 129, 0.3);
+}
+
+.profile-header h1 {
+  font-size: 1.5rem;
+  margin-bottom: 4px;
+}
+
+.profile-header p {
+  font-size: 0.85rem;
+  color: var(--text-muted);
+}
+
+/* --- Sections --- */
+.profile-section {
+  padding: var(--space-lg);
+}
+
+.section-header {
+  display: flex;
+  align-items: center;
+  gap: var(--space-sm);
+  margin-bottom: var(--space-md);
+  color: var(--primary-400);
+}
+
+.section-header h2 {
+  font-size: 1rem;
+  color: var(--text-primary);
+}
+
+/* --- Form --- */
+.form-grid {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-md);
+}
+
+.form-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--space-md);
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.form-group label {
+  font-size: 0.78rem;
+  font-weight: 600;
+  color: var(--text-secondary);
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.form-group select {
+  appearance: none;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%2394a3b8' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='m6 9 6 6 6-6'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 12px center;
+  padding-right: 32px;
+}
+
+.form-group textarea {
+  resize: vertical;
+  min-height: 60px;
+}
+
+/* --- Chips --- */
+.chips-group {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-sm);
+}
+
+.chip {
+  padding: 6px 14px;
+  background: var(--bg-tertiary);
+  border: 1.5px solid var(--border-color);
+  border-radius: var(--radius-full);
+  color: var(--text-secondary);
+  font-size: 0.8rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all var(--transition-fast);
+  font-family: var(--font-body);
+}
+
+.chip:hover {
+  border-color: var(--primary-500);
+  color: var(--primary-400);
+}
+
+.chip--active {
+  background: rgba(16, 185, 129, 0.12);
+  border-color: var(--primary-500);
+  color: var(--primary-400);
+  font-weight: 600;
+}
+
+/* --- Save Area --- */
+.save-area {
+  text-align: center;
+  padding: var(--space-md) 0;
+}
+
+.save-btn {
+  width: 100%;
+  max-width: 360px;
+}
+
+.save-note {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  margin-top: var(--space-sm);
+  font-size: 0.72rem;
+  color: var(--text-muted);
+}
+
+/* --- Responsive --- */
+@media (max-width: 600px) {
+  .form-row {
+    grid-template-columns: 1fr;
+  }
+}

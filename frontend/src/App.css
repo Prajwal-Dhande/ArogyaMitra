@@ -1,0 +1,9 @@
+/* App-level styles (minimal - design system is in index.css) */
+
+/* Page transition wrapper */
+.page-wrapper {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  animation: fadeIn 0.3s ease-out;
+}
