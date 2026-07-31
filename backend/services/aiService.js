@@ -1,6 +1,6 @@
 const axios = require('axios');
 
-const AI_SERVICE_URL = process.env.AI_SERVICE_URL || 'http://localhost:8000';
+const AI_SERVICE_URL = process.env.AI_SERVICE_URL || 'https://arogyamitra-ai-service.onrender.com';
 
 // In-memory session store (replace with DB in production)
 const sessionStore = new Map();

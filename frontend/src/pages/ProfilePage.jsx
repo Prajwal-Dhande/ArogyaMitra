@@ -83,7 +83,7 @@ export default function ProfilePage() {
 
   useEffect(() => {
     // Fetch profile from backend on mount
-    const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:3001';
+    const API_URL = import.meta.env.VITE_API_URL || 'https://arogyamitra-2dj0.onrender.com';
     fetch(`${API_URL}/api/health/profile`)
       .then(res => res.json())
       .then(data => {
@@ -109,7 +109,7 @@ export default function ProfilePage() {
 
   const handleSave = async () => {
     try {
-      const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:3001';
+      const API_URL = import.meta.env.VITE_API_URL || 'https://arogyamitra-2dj0.onrender.com';
       const response = await fetch(`${API_URL}/api/health/profile`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
